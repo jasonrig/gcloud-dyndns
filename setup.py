@@ -12,6 +12,6 @@ setup(
     description='Update GCP Cloud DNS using the host\'s publicly visible IP address',
     install_requires=[
         'google-cloud-dns>=0.30.2,<0.31',
-        'requests>=2.22.0,2.23'
+        'requests>=2.22.0,<2.23'
     ]
 )
