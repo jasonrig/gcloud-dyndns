@@ -52,6 +52,10 @@ def update_dns(zone_name: str, dns_name: str, ttl: int = 60, force_update: bool 
     :param project_id: the GCP project id
     :return: the applied change set
     """
+
+    if not dns_name.endswith("."):
+        dns_name = "%s." % dns_name
+
     if len(resolve_addresses(dns_name).symmetric_difference(my_ip())) == 0 and not force_update:
         return
 
