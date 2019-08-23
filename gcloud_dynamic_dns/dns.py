@@ -17,7 +17,10 @@ def resolve_addresses(dns_name: str, kind: Iterable[socket.AddressFamily] = IPV4
     :param kind: an iterable of the types of IP address to return
     :return: a set of IP address strings
     """
-    return set((item[-1][0] for item in socket.getaddrinfo(dns_name, None) if item[0] in kind))
+    try:
+        return set((item[-1][0] for item in socket.getaddrinfo(dns_name, None) if item[0] in kind))
+    except socket.gaierror:
+        return set()
 
 
 def my_ip(kind: Iterable[socket.AddressFamily] = IPV4_6, query_host: str = "ifconfig.co") -> Set[str]:
