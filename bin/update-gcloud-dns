@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+import argparse
+
+from gcloud_dynamic_dns.dns import update_dns
+
+parser = argparse.ArgumentParser()
+parser.add_argument("zone_name", help="the name of the GCP zone to manage")
+parser.add_argument("dns_name", help="the DNS name to update")
+parser.add_argument("--ttl", help="TTL of the update record", default=60)
+parser.add_argument("--project_id", default=None, help="name of the GCP project")
+parser.add_argument("--force_update", action="store_true", default=False, help="force the DNS update even if the record hasn't changed")
+
+if __name__ == "__main__":
+    args = parser.parse_args()
+    update_dns(args.zone_name, args.dns_name, args.ttl, args.force_update, args.project_id)
